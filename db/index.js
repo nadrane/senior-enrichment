@@ -16,7 +16,11 @@ const db = module.exports = new Sequelize(connectionString, {
 });
 
 // run our models file (makes all associations for our Sequelize objects)
-require('./models')
+const models = require('./models')
+
+models.Campus.hasMany(models.User, {foreignKey: 'StudentId'})
+models.User.belongsTo(models.Campus, {as:'Campus'} )
+
 
 // sync the db, creating it if necessary
 function sync(force=false, retries=0, maxRetries=5) {
