@@ -26,7 +26,7 @@ router.get('/:studentId', (req,res,next) => {
 router.post('/', function (req, res, next) {
   Campus.findOne({
     where: {
-      id: req.body.campus_id
+      id: req.body.campusId
     }
   })
   .then(campus => {
@@ -56,7 +56,7 @@ router.put('/:studentId', (req,res,next) => {
 //DELETE a student
 router.delete('/:studentId', (req, res, next) => {
     const id = req.params.studentId
-    student.destroy({ where: { id } })
+    Student.destroy({ where: { id } })
         .then(() => res.status(204).end())
         .catch(next);
 })
