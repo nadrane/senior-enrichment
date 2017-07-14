@@ -58,16 +58,16 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _Root = __webpack_require__(226);
+	var _Navbar = __webpack_require__(226);
 	
-	var _Root2 = _interopRequireDefault(_Root);
+	var _Navbar2 = _interopRequireDefault(_Navbar);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	(0, _reactDom.render)(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: _store2.default },
-	  _react2.default.createElement(_Root2.default, null)
+	  _react2.default.createElement(_Navbar2.default, null)
 	), document.getElementById('main'));
 
 /***/ }),
@@ -25123,7 +25123,7 @@
 /* 226 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -25137,86 +25137,81 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var WinterJokes = function (_Component) {
-	  _inherits(WinterJokes, _Component);
+	/* -----------------    COMPONENT     ------------------ */
 	
-	  function WinterJokes() {
-	    _classCallCheck(this, WinterJokes);
+	var Navbar = function (_React$Component) {
+	  _inherits(Navbar, _React$Component);
 	
-	    var _this = _possibleConstructorReturn(this, (WinterJokes.__proto__ || Object.getPrototypeOf(WinterJokes)).call(this));
+	  function Navbar(props) {
+	    _classCallCheck(this, Navbar);
 	
-	    _this.nextJoke = _this.nextJoke.bind(_this);
-	    _this.answer = _this.answer.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this, props));
 	  }
 	
-	  _createClass(WinterJokes, [{
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {
-	      this.nextJoke();
-	    }
-	  }, {
-	    key: 'nextJoke',
-	    value: function nextJoke() {
-	      this.setState({
-	        joke: randomJoke(),
-	        answered: false
-	      });
-	    }
-	  }, {
-	    key: 'answer',
-	    value: function answer() {
-	      this.setState({ answered: true });
-	    }
-	  }, {
-	    key: 'render',
+	  _createClass(Navbar, [{
+	    key: "render",
 	    value: function render() {
-	      if (!this.state) {
-	        return null;
-	      }
-	
-	      var _state = this.state,
-	          joke = _state.joke,
-	          answered = _state.answered;
-	
 	      return _react2.default.createElement(
-	        'div',
-	        null,
+	        "nav",
+	        { className: "nav has-shadow", id: "top" },
 	        _react2.default.createElement(
-	          'h1',
-	          { onClick: answered ? this.nextJoke : this.answer },
-	          joke.q
-	        ),
-	        answered && _react2.default.createElement(
-	          'h2',
-	          null,
-	          joke.a
+	          "div",
+	          { className: "container" },
+	          _react2.default.createElement(
+	            "div",
+	            { className: "nav-left" },
+	            _react2.default.createElement(
+	              "a",
+	              { className: "nav-item", href: "../index.html" },
+	              _react2.default.createElement("img", { src: "/images/defaultCampus.png", alt: "Description" })
+	            )
+	          ),
+	          _react2.default.createElement(
+	            "span",
+	            { className: "nav-toggle" },
+	            _react2.default.createElement("span", null),
+	            _react2.default.createElement("span", null),
+	            _react2.default.createElement("span", null)
+	          ),
+	          _react2.default.createElement(
+	            "div",
+	            { className: "nav-right nav-menu" },
+	            _react2.default.createElement(
+	              "a",
+	              { className: "nav-item is-tab is-active" },
+	              "Home"
+	            ),
+	            _react2.default.createElement(
+	              "a",
+	              { className: "nav-item is-tab" },
+	              "Features"
+	            ),
+	            _react2.default.createElement(
+	              "a",
+	              { className: "nav-item is-tab" },
+	              "Team"
+	            ),
+	            _react2.default.createElement(
+	              "a",
+	              { className: "nav-item is-tab" },
+	              "Help"
+	            )
+	          )
 	        )
 	      );
 	    }
 	  }]);
 	
-	  return WinterJokes;
-	}(_react.Component);
+	  return Navbar;
+	}(_react2.default.Component);
 	
-	exports.default = WinterJokes;
-	
-	
-	function randomJoke() {
-	  return jokes[Math.floor(Math.random() * jokes.length)];
-	}
-	
-	var jokes = 'Q: What did the Arctic wolf ask in the restaurant?\nA: Are these lemmings fresh off the tundra?\nQ: What did the big furry hat say to the warm woolly scarf?\nA: You hang around while I go on ahead.\nQ: What\'s the difference between an iceberg and a clothes brush?\nA: One crushes boats and the other brushes coats!\nQ: Why aren\'t penguins as lucky as Arctic murres?\nA: The poor old penguins can\'t go south for the winter. (they live in Antarctica)\nQ: How do you keep from getting cold feet?\nA: Don\'t go around BRRfooted!\nQ: Why is the slippery ice like music?\nA: If you don\'t C sharp - you\'ll B flat!\nQ: What\'s an ig?\nA: A snow house without a loo!\nQ: Where do seals go to see movies?\nA: The dive-in!\nQ: What kind of math do Snowy Owls like?\nA: Owlgebra.\nQ: What did the ocean say to the bergy bits?\nA: Nothing. It just waved.\nQ: What sits on the bottom of the cold Arctic Ocean and shakes?\nA: A nervous wreck.\nQ: How do you know if there\'s a snowman in your bed? \nA: You wake up wet!\nQ: How do you tell the difference between a walrus and an orange?\nA: Put your arms around it and squeeze it. If you don\'t get orange juice, it\'s a walrus.\nQ: What do chefs call "Baked Alaska" in Alaska?\nA: Baked Here\nQ: Getting a job in the Arctic in the winter is great! Why?\nA: When the days get short, you only have to work a 30 minute work week.\nQ: Why do seals swim in salt water?\nA: Because pepper water makes them sneeze!\nQ: Where can you find an ocean without any water?\nA: On a map!\nQ: What eight letters can you find in water from the Arctic Ocean?\nA: H to O! (H20)\nQ: Which side of an Arctic Tern has the most feathers?\nA: The outside!\nQ: What vegetable was forbidden on the ships of Arctic explorers?\nA: Leeks!\nQ: What happened when all the collected muskox wool was stolen?\nA: The police combed the area.\nQ: What did one Greenland Shark say to the other?\nA: Say, good lookin\'... didn\'t I meet you last night at the feeding frenzy?\nQ: What\'s a sign that you have an irrational fear of icebergs?\nA: You start having water-tight compartments installed in your pants.\nQ: What did the seal say when it swam into a concrete wall?\nA: Dam!\nQ: What do you call a reindeer with no eyes?\nA: I have no eye deer.\nQ: What do you get from sitting on the ice too long?\nA: Polaroids!\nQ: What did the detective in the Arctic say to the suspect?\nA: Where were you on the night of September to March?\nQ: What noise wakes you up at the North Pole around March 18?\nA: The crack of dawn!\nQ: If you live in an igloo, what\'s the worst thing about global warming?\nA: No privacy!\nQ: When are your eyes not eyes?\nA: When the cold Arctic wind makes them water!\nQ: What did the icy Arctic road say to the truck?\nA: Want to go for a spin?\nQ: What do Arctic hares use to keep their fur lookin\' spiffy?\nA: Hare spray!\nQ: What do you call ten Arctic hares hopping backwards through the snow together?\nA: A receding hare line.\nQ: Why are bad school grades like a shipwreck in the Arctic Ocean?\nA: They\'re both below C level!'.split('\n').reduce(function (all, row, i) {
-	  return i % 2 === 0 ? [].concat(_toConsumableArray(all), [{ q: row }]) : [].concat(_toConsumableArray(all.slice(0, all.length - 1)), [Object.assign({ a: row }, all[all.length - 1])]);
-	}, []);
+	exports.default = Navbar;
 
 /***/ })
 /******/ ]);
