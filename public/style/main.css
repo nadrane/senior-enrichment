@@ -11,3 +11,19 @@
 small{
   color: rebeccapurple;
 }
+
+.column{
+  max-width: 500px
+}
+
+.campuslist{
+  padding: 20px 20px 20px 20px
+}
+
+.studentlist{
+  padding: 20px 20px 20px 20px
+}
+
+.addCampus{
+  padding: 20px 20px 20px 20px
+}

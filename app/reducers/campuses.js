@@ -19,16 +19,12 @@ const update = campus => ({ type: UPDATE, campus });
 
 export default function reducer (campuses = [], action) {
   switch (action.type) {
-
     case INITIALIZE:
       return action.campuses;
-
     case CREATE:
       return [action.campus, ...campuses];
-
     case REMOVE:
       return campuses.filter(campus => campus.id !== action.id);
-
     case UPDATE:
       return campuses.map(user => (
         action.campus.id === campus.id ? action.campus : campus
@@ -43,7 +39,8 @@ export default function reducer (campuses = [], action) {
 
 export const fetchCampuses = () => dispatch => {
   axios.get('/api/campus')
-       .then(res => dispatch(init(res.data)));
+    .then(res => dispatch(init(res.data)))
+    .catch(err => console.error('Error fetching campuses', err));
 };
 
 

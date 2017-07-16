@@ -1,16 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { setStudent } from '../reducers/currentStudent'
 
 
-class StudentReview extends React.Component{
+class StudentDetail extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            student: {},
             name: '',
             email: '',
-            imgUrl: '',
+            imgUrl: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleNameChange = this.handleNameChange.bind(this)
@@ -20,9 +18,11 @@ class StudentReview extends React.Component{
 
     componentDidMount(){
         setStudent(this.props.match.params.studentId)
+        this.setState(this.props.currentStudent)
     }
+
     handleSubmit(e){
-        updateStudent(this.props.currentStudent.id, {
+        updateStudent(this.props.match.params.studentId, {
             name: e.target.name,
             campusId: e.target.campusId,
             email: e.target.email,
@@ -47,38 +47,49 @@ class StudentReview extends React.Component{
     
 
     render(){
-        return(
+        
+    return (
+            <div>
+            <box>Name: {this.props.currentStudent.name}
+                Email: {this.props.currentStudent.email}
+                Campus: {this.props.currentStudent.campusId}
+                <img src={this.props.currentStudent.imgUrl}/>
+            </box>
+
             <form onSubmit={this.handleSubmit}>
+                Name:
                  <input
                     className="input"
                     type="text"
                     name="name"
-                    value={this.props.currentUser.name}
+                    value={this.state.name}
                     onChange={this.handleNameChange}
                     placeholder="Name"
                 />
+                Email:
                 <input
                     className="input"
                     type="text"
                     name="email"
-                    value={this.props.currentUser.email}
+                    value={this.state.email}
                     onChange={this.handleEmailChange}
                     placeholder="Email"
                 />
+                Image URL: 
                  <input
                     className="input"
                     type="text"
                     name="imgUrl"
-                    value={this.props.currentUser.imgUrl}
+                    value={this.state.imgUrl}
                     onChange={this.handleImgUrlChange}
                     placeholder="Image URL"
                 />
             </form>
-        )
-    }
+            </div>
+        )}
 }
 
 const mapState = ({ students }) => ({ students });
-const mapDispatch = {updateStudent};
+const mapDispatch = { };
 
-export default connect(mapState, mapDispatch)(SchoolReview);
+export default connect(mapState, mapDispatch)(StudentDetail);

@@ -10,6 +10,6 @@ module.exports = db.define('campus', {
   },
   imgUrl: {
     type: Sequelize.STRING,
-    defaultValue: '/images/defaultCampus.png'
+    defaultValue: '/images/defaultCampus.png',
   }
 })
