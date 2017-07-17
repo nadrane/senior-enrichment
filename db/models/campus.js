@@ -4,6 +4,6 @@ var db = require('../index.js')
 
 
 module.exports = db.define('Campus',{
-    name: Sequelize.STRING,
+    name: Sequelize.STRING, //I would be explicit and use allowNull on every field.
     image: Sequelize.STRING
 })

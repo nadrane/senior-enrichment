@@ -20,12 +20,12 @@ export default function reducer(campuses = [], action) {
 
       case UPDATE_CAMPUS:
         return campuses.map(campus => (
-        action.campus.id === campus.id ? action.campus : campus
+        action.campus.id === campus.id ? action.campus : campus // very succinct
       ))
 
     case DEL_CAMPUS:
       return campuses.filter(campus => {
-        return campus.id !== action.campusId;
+        return campus.id !== action.campusId; // very succinct
       });
     default:
       return campuses;
@@ -35,6 +35,7 @@ export default function reducer(campuses = [], action) {
 export const fetchCampuses = ()  => dispatch => {
     axios.get('/api/campus')
         .then(res => dispatch(readCampuses(res.data)))
+        //Forgot to catch errors
 }
 
 export const addCampus = (campus) => dispatch => {
@@ -51,7 +52,7 @@ export const editCampus = (id, campus) => dispatch => {
 };
 
 export const removeCampus = id => dispatch => {
-  dispatch(deleteCampus(id));
+  dispatch(deleteCampus(id));  // Is it a good idea to delete on the front end before verifying the delete was successful on the backend?
   axios.delete(`/api/campus/${id}`)
        .catch(err => console.error(`Removing campus: ${id} unsuccesful`, err));
 }

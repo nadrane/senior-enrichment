@@ -11,6 +11,7 @@ import {fetchStudents} from './reducers/students'
 
 export class Routes extends React.Component {
   componentDidMount(){
+    //How would it scale up to just always grab everything on the main component?
       this.props.fetchInitialData()
   }
   render() {
@@ -32,7 +33,7 @@ export class Routes extends React.Component {
 const mapStatetoProps= null;
 
 const mapDispatchtoProps =  dispatch => ({
-  fetchInitialData: () => {
+  fetchInitialData: () => { //Good job defining your own function inside mapDispatchtoProps.
     dispatch(fetchStudents());
     dispatch(fetchCampuses());
   }

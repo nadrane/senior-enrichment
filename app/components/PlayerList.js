@@ -7,10 +7,11 @@ class StudentList extends React.Component {
     super();
     this.onClickHandler = this.onClickHandler.bind(this)
     }
-  
 
+  //Technically no need to bind this the way it's written since "this" is not referenced.
   onClickHandler(e){
     console.log(e)
+    //This is referencing the importing removeStudent thunk, not the one mapped to dispatch.
     removeStudent(e.target.id)
   }
 

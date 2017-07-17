@@ -21,13 +21,14 @@ router.get("/:studentId", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
+    // over aggressive copy paste? You're sending campus back
     User.create(req.body).then(campus => res.json(campus)).catch(next);
 });
 
 router.delete("/:userId", (req, res, next) => {
     const id = req.params.userId;
     User.destroy({ where: { id } })
-    .then(() => res.status(204).end())
+    .then(() => res.status(204).end()) //Just use sendStatus(204)
     .catch(next);
 });
 

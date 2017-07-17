@@ -3,6 +3,7 @@ import PlayerList from "./PlayerList";
 import { addStudent } from "../reducers/students";
 import {connect} from 'react-redux'
 
+//Super ambiguous name. AddStudent perhaps?
 class AddForm extends React.Component {
   constructor() {
     super();

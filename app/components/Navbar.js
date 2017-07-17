@@ -18,6 +18,7 @@ class Navbar extends React.Component {
               <NavLink to="/teams">Teams</NavLink>
             </li>
             <li>
+             {/* why are we using NavLink */}
               <NavLink to="/players">Players</NavLink>
             </li>
           </ul>
