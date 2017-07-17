@@ -59,7 +59,7 @@ export const removeStudent = id => dispatch => {
        .catch(err => console.error(`Removing student: ${id} unsuccessful`, err));
 };
 
-export const addStudent = story => dispatch => {
+export const addStudent = student => dispatch => {
   axios.post('/api/student', student)
        .then(res => dispatch(create(res.data)))
        .catch(err => console.error(`Creating student: ${student} unsuccessful`, err));

@@ -1,95 +1,118 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux';
+import { updateStudent } from '../../reducers/students'
+import _ from 'lodash';
+
+/* -----------------    COMPONENT     ------------------ */
+
+class StudentDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.submitEdit = this.submitEdit.bind(this)
+  }
+
+  submitEdit(event){
+    event.preventDefault();
+    const studentId = this.props.match.params.studentId
+    const name = event.target.name.value
+    const imgUrl = event.target.imgUrl.value
+    const email = event.target.email.value
+    const campusId = event.target.campus.value
+
+    imgUrl === '' ? this.props.updateStudent(studentId, {name, campusId, email}) : this.props.updateStudent(studentId, {name, imgUrl, campusId, email})
 
 
-class StudentDetail extends React.Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            name: '',
-            email: '',
-            imgUrl: ''
-        }
-        this.handleSubmit = this.handleSubmit.bind(this)
-        this.handleNameChange = this.handleNameChange.bind(this)
-        this.handleEmailChange = this.handleEmailChange.bind(this)
-        this.handleImgUrlChange = this.handleImgUrlChange.bind(this)
-    }
+    //Clear the form
+    event.target.name.value = '';
+    event.target.imgUrl.value = '';
+  }
 
-    componentDidMount(){
-        setStudent(this.props.match.params.studentId)
-        this.setState(this.props.currentStudent)
-    }
-
-    handleSubmit(e){
-        updateStudent(this.props.match.params.studentId, {
-            name: e.target.name,
-            campusId: e.target.campusId,
-            email: e.target.email,
-            imgUrl: e.target.imgUrl
-        })
-        this.setState({
-            name: '',
-            email: '',
-            imgUrl: '',
-        })
-    }
-
-    handleNameChange(e){
-        this.setState({name: e.target.value})
-    }
-    handleEmailChange(e){
-        this.setState({email: e.target.value})
-    }
-    handleImgUrlChange(e){
-        this.setState({imgUrl: e.target.value})
-    }
-    
-
-    render(){
-        
-    return (
-            <div>
-            <box>Name: {this.props.currentStudent.name}
-                Email: {this.props.currentStudent.email}
-                Campus: {this.props.currentStudent.campusId}
-                <img src={this.props.currentStudent.imgUrl}/>
-            </box>
-
-            <form onSubmit={this.handleSubmit}>
-                Name:
-                 <input
-                    className="input"
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleNameChange}
-                    placeholder="Name"
-                />
-                Email:
-                <input
-                    className="input"
-                    type="text"
-                    name="email"
-                    value={this.state.email}
-                    onChange={this.handleEmailChange}
-                    placeholder="Email"
-                />
-                Image URL: 
-                 <input
-                    className="input"
-                    type="text"
-                    name="imgUrl"
-                    value={this.state.imgUrl}
-                    onChange={this.handleImgUrlChange}
-                    placeholder="Image URL"
-                />
-            </form>
-            </div>
-        )}
+  render() {
+  const {student, campuses} = this.props
+  if (!student) return <div />
+  const campus = _.find(campuses, campus => campus.id == student.campusId)
+   return (
+    <div> 
+       <section className="hero">
+         <div className="hero-body">
+           <div className="container">
+             <h1 className="title">
+               {student.name} from <NavLink to={`/campuses/${campus.id}`}> {campus.name} </NavLink> <br />
+               Email: {student.email}
+            </h1>
+            <img src={student.imgUrl}/>
+           </div>
+         </div>
+       </section>
+      <div className="columns">
+        <div className="addCampus column forms">
+            <br/>
+              Edit Student Information
+                  <form onSubmit={this.submitEdit}>
+                      <div className="field">
+                          <label className="label">Name</label>
+                          <p className="control">
+                              <input
+                                  className="input"
+                                  type="text"
+                                  name="name"
+                                  placeholder="Student name"
+                              />
+                          </p>
+                      </div>
+                      <div className="field">
+                          <label className="label">Email</label>
+                          <p className="control">
+                              <input
+                                  className="input"
+                                  type="text"
+                                  name="email"
+                                  placeholder="Student Email"
+                              />
+                          </p>
+                      </div>
+                      <div className="field">
+                          <label className="label">Link to an image!</label>
+                          <p className="control">
+                              <input
+                                  className="input"
+                                  type="text"
+                                  name="imgUrl"
+                                  placeholder="Image URL"
+                              />
+                          </p>
+                      </div>
+                      <div className="field">
+                          <label className="label">School Assignment</label>
+                          <p className="control">
+                              <span className="select">
+                                  <select name="campus">
+                                      {
+                                          campuses.map(campus => 
+                                              <option key={campus.id} value={campus.id}>{campus.name}</option>
+                                          )
+                                      }
+                                  </select>
+                              </span>
+                          </p>
+                      </div>
+                      <button className="button is-primary" type="submit">Submit</button>
+                  </form>
+          </div>
+        </div>
+    </div>
+    );
+  }
 }
+/* -----------------    CONTAINER     ------------------ */
 
-const mapState = ({ students }) => ({ students });
-const mapDispatch = { };
+const mapState = ({ students, campuses }, ownProps) => {
+  const paramId = Number(ownProps.match.params.studentId);
+  const student = _.find(students, student => student.id === paramId);
+  return {student, campuses};
+};
+
+const mapDispatch = { updateStudent };
 
 export default connect(mapState, mapDispatch)(StudentDetail);

@@ -30,9 +30,10 @@ router.post('/', (req, res, next) => {
 
 //PUT modified campus info
 router.put('/:campusId', (req,res,next) => {
-  const campusId = req.params.messageId;
+  const campusId = req.params.campusId;
   Campus.findById(campusId)
     .then(campus => campus.update(req.body))
+    .then(campus => res.status(202).json(campus))
     .catch(next);
 })
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { removeStudent } from '../../reducers/students'
+import StudentItem from './StudentItem'
 
 class StudentList extends Component{
     constructor(props){
@@ -15,20 +16,34 @@ class StudentList extends Component{
     }
 
     render(){
+        const students = this.props.students
+        if (students.length === 0) return(      
+        <section className="hero">
+         <div className="hero-body">
+           <div className="container">
+             <h1 className="title">
+                No students enrolled.
+            </h1>
+           </div>
+         </div>
+       </section>)
         return(
-        <div> 
-            {this.props.students.map(student => (
-                <div key={student.id}>
-                    <NavLink to={`/students/${student.id}`}>{student.name}</NavLink>
-                    <button onClick={this.deleteStudent} value={student.id}>Delete</button>
+        <div className="columns is-multiline campuslist">
+            {
+            students
+                .map(student => 
+                <div className="column" key={student.id}>
+                    <StudentItem student={student} />
                 </div>
-            ))}
-        </div>)
+                )
+            }
+        </div>
+        )
     }
 }
 
 const mapState = ({ students }) => ({ students });
 
-const mapDispatch = { removeStudent };
+const mapDispatch = { };
 
 export default connect(mapState, mapDispatch)(StudentList); 

@@ -9,11 +9,6 @@ import CampusItem from './CampusItem'
 class CampusList extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      name: '',
-      imgUrl: '',
-    };
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -42,7 +37,6 @@ class CampusList extends Component {
                             className="input"
                             type="text"
                             name="name"
-                            onChange={evt => this.setState({ name: evt.target.value })}
                             placeholder="Campus name"
                         />
                     </p>
@@ -54,7 +48,6 @@ class CampusList extends Component {
                             className="input"
                             type="text"
                             name="imgUrl"
-                            onChange={evt => this.setState({ imgUrl: evt.target.value })}
                             placeholder="Image URL"
                         />
                     </p>
@@ -68,8 +61,9 @@ class CampusList extends Component {
 
   handleSubmit(event){
     event.preventDefault();
-    let name = this.state.name
-    let imgUrl = this.state.imgUrl
+
+    let name = event.target.name.value
+    let imgUrl = event.target.imgUrl.value
 
     //If no URL is provided, we want Sequelize to use the model's default
     imgUrl === '' ? this.props.addCampus({name}) : this.props.addCampus({name, imgUrl})

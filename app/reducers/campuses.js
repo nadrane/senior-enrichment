@@ -26,7 +26,7 @@ export default function reducer (campuses = [], action) {
     case REMOVE:
       return campuses.filter(campus => campus.id !== action.id);
     case UPDATE:
-      return campuses.map(user => (
+      return campuses.map(campus => (
         action.campus.id === campus.id ? action.campus : campus
       ));
     default:
@@ -59,7 +59,7 @@ export const addCampus = campus => dispatch => {
 };
 
 export const updateCampus = (id, campus) => dispatch => {
-  axios.put(`/api/users/${id}`, campus)
+  axios.put(`/api/campus/${id}`, campus)
        .then(res => dispatch(update(res.data)))
        .catch(err => console.error(`Updating campus: ${campus} unsuccesful`, err));
 };

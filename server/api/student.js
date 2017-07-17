@@ -48,8 +48,9 @@ router.post('/', function (req, res, next) {
 //PUT modified student info
 router.put('/:studentId', (req,res,next) => {
   const studentId = req.params.studentId;
-  student.findById(studentId)
+  Student.findById(studentId)
     .then(student => student.update(req.body))
+    .then(student => res.status(202).json(student))
     .catch(next);
 })
 
