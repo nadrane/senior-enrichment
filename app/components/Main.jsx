@@ -1,4 +1,4 @@
-//Dependencies 
+//Dependencies
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import store from '../store'
@@ -22,7 +22,7 @@ import StudentList from './students/StudentList';
 
 
 export default class Main extends Component {
-
+  // How might this model of always grabbing all the data scale?
   componentDidMount () {
     const campusesThunk = fetchCampuses();
     const studentsThunk = fetchStudents();

@@ -17,6 +17,7 @@ module.exports = db.define('student', {
 }, {
   defaultScope: {
     include: [
+      //This is probably over aggressive joining. we will likely talk more about this later
       { model: Campus }
     ]
   }

@@ -28,12 +28,14 @@ class StudentDetail extends React.Component {
     event.target.imgUrl.value = '';
   }
 
+  //This is quite long. It would stand to be split into multiple components.
   render() {
   const {student, campuses} = this.props
   if (!student) return <div />
+  //Find is actually on the array.prototype
   const campus = _.find(campuses, campus => campus.id == student.campusId)
    return (
-    <div> 
+    <div>
        <section className="hero">
          <div className="hero-body">
            <div className="container">
@@ -89,7 +91,7 @@ class StudentDetail extends React.Component {
                               <span className="select">
                                   <select name="campus">
                                       {
-                                          campuses.map(campus => 
+                                          campuses.map(campus =>
                                               <option key={campus.id} value={campus.id}>{campus.name}</option>
                                           )
                                       }

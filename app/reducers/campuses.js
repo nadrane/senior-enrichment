@@ -24,10 +24,10 @@ export default function reducer (campuses = [], action) {
     case CREATE:
       return [action.campus, ...campuses];
     case REMOVE:
-      return campuses.filter(campus => campus.id !== action.id);
+      return campuses.filter(campus => campus.id !== action.id); // nice! very clean
     case UPDATE:
       return campuses.map(campus => (
-        action.campus.id === campus.id ? action.campus : campus
+        action.campus.id === campus.id ? action.campus : campus  // nice! very clean
       ));
     default:
       return campuses;
@@ -45,7 +45,8 @@ export const fetchCampuses = () => dispatch => {
 
 
 export const removeCampus = id => dispatch => {
-  dispatch(remove(id));
+  dispatch(remove(id)); //I would only do this after getting success from the server
+  //What if the delete failed?
   axios.delete(`/api/campus/${id}`)
        .catch(err => console.error(`Removing campus: ${id} unsuccesful`, err));
 };

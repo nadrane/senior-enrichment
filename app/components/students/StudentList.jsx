@@ -7,17 +7,17 @@ import StudentItem from './StudentItem'
 class StudentList extends Component{
     constructor(props){
         super(props)
-        this.deleteStudent = this.deleteStudent.bind(this)
+        this.deleteStudent = this.deleteStudent.bind(this) // We don't need to bind this. Mostly because deleteStudent is never invoked anywhere.
     }
-    
+
     deleteStudent(e){
         const id = e.target.value
-        this.props.removeStudent(id)
+        this.props.removeStudent(id) //We never used mapDispatchToProps. This wont exist.
     }
 
     render(){
         const students = this.props.students
-        if (students.length === 0) return(      
+        if (students.length === 0) return(
         <section className="hero">
          <div className="hero-body">
            <div className="container">
@@ -31,7 +31,7 @@ class StudentList extends Component{
         <div className="columns is-multiline campuslist">
             {
             students
-                .map(student => 
+                .map(student =>
                 <div className="column" key={student.id}>
                     <StudentItem student={student} />
                 </div>
@@ -46,4 +46,4 @@ const mapState = ({ students }) => ({ students });
 
 const mapDispatch = { };
 
-export default connect(mapState, mapDispatch)(StudentList); 
+export default connect(mapState, mapDispatch)(StudentList);

@@ -9,7 +9,7 @@ module.exports = db.define('campus', {
     allowNull: false
   },
   imgUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING, //I would explicitly use allowNull
     defaultValue: '/images/defaultCampus.png',
   }
 })
